@@ -1,0 +1,177 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --text: #222222;
+  --text-muted: #888888;
+  --border: #e0e0e0;
+  --radius: 8px;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+#app {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+}
+
+h1 {
+  margin-bottom: 24px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* --- Виселица --- */
+.hangman {
+  height: 190px;
+  margin: 20px auto;
+  max-width: 260px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><line x1="20" y1="180" x2="120" y2="180" stroke="%23999999" stroke-width="3" stroke-linecap="round"/><line x1="70" y1="180" x2="70" y2="20" stroke="%23999999" stroke-width="3" stroke-linecap="round"/><line x1="70" y1="20" x2="150" y2="20" stroke="%23999999" stroke-width="3" stroke-linecap="round"/><line x1="150" y1="20" x2="150" y2="50" stroke="%23999999" stroke-width="3" stroke-linecap="round"/></svg>') no-repeat center;
+  background-size: contain;
+}
+
+/* -- Счетчик -- */
+.score {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* --- Маска слова --- */
+.word-mask {
+  font-size: 2rem;
+  letter-spacing: 12px;
+  margin: 24px 0;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: var(--text);
+  min-height: 2.6rem;
+}
+
+/* --- Неверные буквы --- */
+.wrong-letters {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin: 10px 0;
+  min-height: 1.5em;
+  letter-spacing: 2px;
+}
+
+/* --- Попытки --- */
+.attempts {
+  font-size: 1rem;
+  margin: 12px 0;
+  color: var(--text-muted);
+}
+
+.attempts strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* --- Клавиатура --- */
+.keyboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
+  gap: 6px;
+  margin: 24px 0;
+}
+
+.key {
+  padding: 12px 0;
+  font-size: 0.95rem;
+  font-weight: 400;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  user-select: none;
+}
+
+.key:hover:not(.key--correct):not(.key--wrong) {
+  background: var(--bg);
+  border-color: #cccccc;
+}
+
+.key--correct {
+  background: var(--bg);
+  border-color: var(--border);
+  color: var(--text-muted);
+  cursor: default;
+}
+
+.key--wrong {
+  background: var(--bg);
+  border-color: var(--border);
+  color: var(--text-muted);
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* --- Баннер результата --- */
+.result-banner {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 18px 0 0;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  color: var(--text);
+}
+
+.result-banner:empty {
+  padding: 0;
+  margin: 0;
+}
+
+/* --- Кнопка "Новая игра" --- */
+.btn-new-game {
+  margin-top: 22px;
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-new-game:hover {
+  background: var(--bg);
+  border-color: #cccccc;
+}
+
+/* --- Адаптив --- */
+@media (max-width: 480px) {
+  body { padding: 20px 12px; }
+  #app { padding: 24px 16px; }
+  h1 { font-size: 1.4rem; }
+  .word-mask { font-size: 1.6rem; letter-spacing: 8px; }
+  .hangman { height: 150px; }
+  .keyboard { grid-template-columns: repeat(auto-fill, minmax(36px, 1fr)); gap: 5px; }
+  .key { padding: 10px 0; font-size: 0.85rem; }
+}
